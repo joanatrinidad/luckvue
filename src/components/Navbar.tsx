@@ -115,7 +115,9 @@ export default function Navbar() {
         </button>
 
         <Link to="/" className="navbar__logo">
-          LUCK<span>VUE</span>
+          LUCK
+          <img src="/logo.png" alt="" className="navbar__logo-mark" />
+          <span>VUE</span>
         </Link>
         <ul className="navbar__links">
           <li><Link to="/">Home</Link></li>

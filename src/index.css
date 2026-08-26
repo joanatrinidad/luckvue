@@ -95,6 +95,9 @@ button {
 }
 
 .navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: 3px;
@@ -102,6 +105,14 @@ button {
 }
 
 .navbar__logo span { color: var(--white); }
+
+.navbar__logo-mark {
+  height: 1.9em;
+  width: auto;
+  flex-shrink: 0;
+  margin-left: -3px;
+  transform: rotate(12deg);
+}
 
 .navbar__links {
   display: flex;
