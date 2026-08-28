@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { ShowPageSkeleton } from '../components/Skeleton'
 import { fetchById, fetchShowSeasons } from '../api/tmdb'
 import { backdropSrcSet, stillSrcSet } from '../api/images'
 import type { Movie, Season } from '../types'
@@ -39,10 +40,7 @@ export default function ShowPage() {
   if (loading) return (
     <>
       <Navbar />
-      <div className="show-page show-page--loading">
-        <div className="show-page__spinner" />
-        <span className="show-page__loading-text">Loading episodes…</span>
-      </div>
+      <ShowPageSkeleton />
     </>
   )
 

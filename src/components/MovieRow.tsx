@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import MovieCard from './MovieCard'
 import RowTrack from './RowTrack'
+import { RowSkeleton } from './Skeleton'
 import type { Movie } from '../types'
 
 interface Props {
   title: string
   movies: Movie[]
   id?: string
+  loading?: boolean
 }
 
-export default function MovieRow({ title, movies, id }: Props) {
+export default function MovieRow({ title, movies, id, loading = false }: Props) {
   const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLElement>(null)
 
@@ -30,6 +32,8 @@ export default function MovieRow({ title, movies, id }: Props) {
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
+
+  if (loading && movies.length === 0) return <RowSkeleton title={title} />
 
   if (movies.length === 0) return null
 

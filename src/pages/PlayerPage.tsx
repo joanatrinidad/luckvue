@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useSearchParams, Navigate, useNavigate } from 'react-router-dom'
 import VideoPlayer from '../components/VideoPlayer'
+import { PlayerSkeleton } from '../components/Skeleton'
 import { fetchById } from '../api/tmdb'
 import type { Movie, MediaType } from '../types'
 
@@ -56,7 +57,10 @@ export default function PlayerPage() {
   )
 
   if (loading) return (
-    <main className="player-page">{backButton}</main>
+    <main className="player-page">
+      {backButton}
+      <PlayerSkeleton />
+    </main>
   )
 
   if (error || !movie) return <Navigate to="/" replace />

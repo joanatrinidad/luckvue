@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import MovieCard from '../components/MovieCard'
+import { GridSkeleton } from '../components/Skeleton'
 import * as tmdb from '../api/tmdb'
 import type { Movie } from '../types'
 
@@ -60,7 +61,7 @@ export default function CategoryPage() {
         </div>
 
         {loading ? (
-          <div className="category-page__loading">Loading…</div>
+          <GridSkeleton />
         ) : (
           <div className="category-page__grid">
             {items.map(movie => (

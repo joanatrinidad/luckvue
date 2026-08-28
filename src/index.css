@@ -1032,13 +1032,6 @@ button {
   color: var(--gray-mid);
 }
 
-.category-page__loading {
-  text-align: center;
-  padding: 80px 0;
-  color: var(--gray-mid);
-  font-size: 1rem;
-}
-
 .category-page__empty {
   text-align: center;
   padding: 80px 0;
@@ -1255,32 +1248,6 @@ button {
   font-size: 0.93rem;
   line-height: 1.65;
   max-width: 680px;
-}
-
-.show-page--loading {
-  padding-top: var(--navbar-h);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  background: var(--navy-dark);
-}
-
-.show-page__spinner {
-  width: 44px;
-  height: 44px;
-  border: 3px solid rgba(244, 197, 66, 0.15);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 0.9s linear infinite;
-}
-
-.show-page__loading-text {
-  color: var(--gray-mid);
-  font-size: 0.88rem;
-  letter-spacing: 0.5px;
 }
 
 .show-backdrop {
@@ -1811,4 +1778,166 @@ button {
 
   .card:hover,
   .card.card--expanded { transform: none; }
+}
+
+/* ============================================================
+   SKELETONS
+   ============================================================ */
+
+.skeleton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--navy-card);
+  flex-shrink: 0;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(244, 197, 66, 0.07) 45%,
+    rgba(255, 255, 255, 0.06) 55%,
+    transparent 100%
+  );
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+    background: rgba(255, 255, 255, 0.04);
+    transform: none;
+  }
+}
+
+/* Visually hidden label so the busy region is announced. */
+.skeleton-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- poster card --- */
+.skeleton--card {
+  width: 158px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius);
+}
+
+.category-page__grid .skeleton--card { width: 100%; }
+
+/* --- rows --- */
+.row--skeleton { animation: none; }
+
+.skeleton-track {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.top10 .skeleton-track { gap: 34px; padding-left: 46px; }
+
+/* --- hero --- */
+.hero--skeleton {
+  position: relative;
+  background-color: var(--navy-darkest);
+}
+
+.skeleton-hero__content {
+  position: relative;
+  z-index: 1;
+  width: var(--hero-col);
+  padding: 0 var(--page-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-hero__title { margin-bottom: 6px; }
+
+.skeleton-hero__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* --- show page --- */
+.show-page-skeleton { padding-top: 0; }
+
+.show-backdrop--skeleton {
+  background-color: var(--navy-darkest);
+}
+
+.show-backdrop--skeleton .show-backdrop__content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.skeleton-show__title { margin-bottom: 6px; }
+.skeleton-show__desc  { margin-top: 6px; }
+
+.skeleton-show__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.ep-card--skeleton {
+  cursor: default;
+}
+
+.ep-card--skeleton:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+.skeleton-ep__thumb {
+  width: 200px;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+/* --- player --- */
+.player__wrapper--skeleton { background: #000; }
+
+.skeleton-player__stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: #0a0a0a;
+}
+
+@media (max-width: 768px) {
+  .skeleton--card { width: 120px; }
+}
+
+@media (max-width: 600px) {
+  .skeleton--card       { width: 104px; }
+  .ep-card--skeleton    { flex-direction: column; }
+  .skeleton-ep__thumb   { width: 100%; }
+}
+
+@media (max-width: 400px) {
+  .skeleton--card { width: 92px; }
 }
